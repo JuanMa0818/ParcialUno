@@ -22,22 +22,22 @@ public class PruebaListaEnlazada {
 
         // 1. Lista nueva
         ListaSimplementeEnlazada<String> vacia = new ListaSimplementeEnlazada<>();
-        Prueba.verificar(vacia.estaVacia(), "Una lista nueva está vacía");
-        Prueba.verificar(vacia.tamanio() == 0, "Una lista nueva tiene tamaño 0");
+        Prueba.verificar(vacia.estaVacia(), "Una lista nueva esta vacia");
+        Prueba.verificar(vacia.tamanio() == 0, "Una lista nueva tiene tamanio 0");
         Prueba.esperarExcepcion(IndexOutOfBoundsException.class,
-                () -> vacia.obtener(0), "obtener(0) en lista vacía lanza excepción");
-        Prueba.verificar(!vacia.eliminar("x"), "eliminar en lista vacía devuelve false");
+                () -> vacia.obtener(0), "obtener(0) en lista vacia lanza excepcion");
+        Prueba.verificar(!vacia.eliminar("x"), "eliminar en lista vacia devuelve false");
 
         // 2. Un solo elemento: agregar y eliminar, y luego volver a agregar
         ListaSimplementeEnlazada<String> uno = new ListaSimplementeEnlazada<>();
         uno.agregar("A");
         uno.eliminar("A");
-        Prueba.verificar(uno.estaVacia(), "Al agregar A y eliminar A la lista queda vacía");
+        Prueba.verificar(uno.estaVacia(), "Al agregar A y eliminar A la lista queda vacia");
         uno.agregar("B");
         Prueba.verificar(uno.obtener(0).equals("B") && uno.tamanio() == 1,
-                "Después de quedar vacía se puede agregar B y obtener(0) es B");
+                "Despues de quedar vacia se puede agregar B y obtener(0) es B");
 
-        // 3. Eliminar el primero, uno del medio, el último y uno que no existe
+        // 3. Eliminar el primero, uno del medio, el ultimo y uno que no existe
         ListaSimplementeEnlazada<String> lista = new ListaSimplementeEnlazada<>();
         lista.agregar("A");
         lista.agregar("B");
@@ -55,19 +55,19 @@ public class PruebaListaEnlazada {
         lista.eliminar("D");
         lista.agregar("E");
         Prueba.verificar(lista.toString().equals("[B -> E]"),
-                "Eliminar el último (D) y agregar E deja [B -> E] (la cola quedó bien)");
+                "Eliminar el ultimo (D) y agregar E deja [B -> E] (la cola quedo bien)");
 
         int tamanioAntes = lista.tamanio();
         Prueba.verificar(!lista.eliminar("Z"), "Eliminar Z (no existe) devuelve false");
-        Prueba.verificar(lista.tamanio() == tamanioAntes, "Al no eliminar nada el tamaño no cambia");
+        Prueba.verificar(lista.tamanio() == tamanioAntes, "Al no eliminar nada el tamanio no cambia");
 
-        // 4. Posiciones inválidas
+        // 4. Posiciones invalidas
         Prueba.esperarExcepcion(IndexOutOfBoundsException.class,
                 () -> lista.obtener(-1), "obtener(-1) lanza IndexOutOfBoundsException");
         Prueba.esperarExcepcion(IndexOutOfBoundsException.class,
                 () -> lista.obtener(lista.tamanio()), "obtener(tamanio()) lanza IndexOutOfBoundsException");
 
-        // 5. El for-each recorre en el mismo orden en que se agregó
+        // 5. El for-each recorre en el mismo orden en que se agrego
         ListaSimplementeEnlazada<String> orden = new ListaSimplementeEnlazada<>();
         orden.agregar("X");
         orden.agregar("Y");
@@ -78,23 +78,23 @@ public class PruebaListaEnlazada {
         }
         Prueba.verificar(recorrido.equals("XYZ"), "El for-each recorre en el orden en que se agregaron");
 
-        // 6. next() cuando ya no hay más elementos
+        // 6. next() cuando ya no hay mas elementos
         Iterator<String> iterador = orden.iterator();
         iterador.next();
         iterador.next();
         iterador.next();
-        Prueba.verificar(!iterador.hasNext(), "Después del último, hasNext() es false");
+        Prueba.verificar(!iterador.hasNext(), "Despues del ultimo, hasNext() es false");
         Prueba.esperarExcepcion(NoSuchElementException.class,
-                () -> iterador.next(), "next() sin más elementos lanza NoSuchElementException");
+                () -> iterador.next(), "next() sin mas elementos lanza NoSuchElementException");
 
-        // 7. También funciona con números (es genérica)
+        // 7. Tambien funciona con numeros (es generica)
         ListaSimplementeEnlazada<Integer> numeros = new ListaSimplementeEnlazada<>();
         numeros.agregar(10);
         numeros.agregar(20);
         numeros.agregar(30);
         numeros.eliminar(20);
         Prueba.verificar(numeros.toString().equals("[10 -> 30]") && numeros.obtener(1) == 30,
-                "La lista también funciona con Integer");
+                "La lista tambien funciona con Integer");
 
         // 8. No se puede agregar null
         Prueba.esperarExcepcion(IllegalArgumentException.class,
