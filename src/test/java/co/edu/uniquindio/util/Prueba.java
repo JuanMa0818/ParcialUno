@@ -21,7 +21,7 @@ public final class Prueba {
                                         Runnable accion, String descripcion) {
         try {
             accion.run();
-            verificar(false, descripcion + " (no lanzo excepcion)");
+            verificar(false, descripcion + " (no lanzó excepción)");
         } catch (Throwable e) {
             verificar(tipo.isInstance(e), descripcion);
         }
