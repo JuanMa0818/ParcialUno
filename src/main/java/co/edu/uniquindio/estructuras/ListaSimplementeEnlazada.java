@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * Lista simplemente enlazada hecha por nosotros, sin usar las listas de Java.
  *
  * Cada nodo guarda un valor y la referencia al siguiente nodo.
- * Guardamos la cabeza (el primero) y la cola (el ultimo).
+ * Guardamos la cabeza (el primero) y la cola (el último).
  * Tener la cola nos sirve para agregar al final sin tener que recorrer
  * toda la lista.
  */
@@ -47,11 +47,11 @@ public class ListaSimplementeEnlazada<T> implements ColeccionGenerica<T> {
         Nodo<T> nuevo = new Nodo<>(elemento);
 
         if (estaVacia()) {
-            // Si la lista esta vacia, el nuevo nodo es el primero y el ultimo
+            // Si la lista está vacía, el nuevo nodo es el primero y el último
             cabeza = nuevo;
             cola = nuevo;
         } else {
-            // Si no, lo pegamos despues de la cola y ahora el es la nueva cola
+            // Si no, lo pegamos después de la cola y ahora él es la nueva cola
             cola.siguiente = nuevo;
             cola = nuevo;
         }
@@ -65,15 +65,15 @@ public class ListaSimplementeEnlazada<T> implements ColeccionGenerica<T> {
      */
     @Override
     public boolean eliminar(T elemento) {
-        // Caso 1: la lista esta vacia, no hay nada que eliminar
+        // Caso 1: la lista está vacía, no hay nada que eliminar
         if (estaVacia()) {
             return false;
         }
 
-        // Caso 2: el elemento esta en la cabeza
+        // Caso 2: el elemento está en la cabeza
         if (cabeza.valor.equals(elemento)) {
             cabeza = cabeza.siguiente;
-            // Si era el unico, la lista queda vacia y la cola tambien se borra
+            // Si era el único, la lista queda vacía y la cola también se borra
             if (cabeza == null) {
                 cola = null;
             }
@@ -105,13 +105,13 @@ public class ListaSimplementeEnlazada<T> implements ColeccionGenerica<T> {
     }
 
     /**
-     * Devuelve el elemento de una posicion (desde 0).
+     * Devuelve el elemento de una posición (desde 0).
      * Hay que avanzar nodo por nodo hasta llegar, por eso es O(n).
      */
     @Override
     public T obtener(int posicion) {
         if (posicion < 0 || posicion >= tamanio) {
-            throw new IndexOutOfBoundsException("Posicion invalida: " + posicion
+            throw new IndexOutOfBoundsException("Posición inválida: " + posicion
                     + ". La lista tiene " + tamanio + " elementos");
         }
 
@@ -134,7 +134,7 @@ public class ListaSimplementeEnlazada<T> implements ColeccionGenerica<T> {
 
     /**
      * Devuelve nuestro propio iterador. Gracias a esto se puede usar
-     * el for-each con la lista, sin que el codigo de afuera vea los nodos.
+     * el for-each con la lista, sin que el código de afuera vea los nodos.
      */
     @Override
     public Iterator<T> iterator() {
@@ -142,7 +142,7 @@ public class ListaSimplementeEnlazada<T> implements ColeccionGenerica<T> {
     }
 
     /**
-     * Muestra la lista asi: [A -> B -> C]. Si esta vacia muestra [].
+     * Muestra la lista así: [A -> B -> C]. Si está vacía muestra [].
      * Usa el for-each sobre la misma lista, o sea, usa nuestro iterador.
      */
     @Override
@@ -179,7 +179,7 @@ public class ListaSimplementeEnlazada<T> implements ColeccionGenerica<T> {
         @Override
         public T next() {
             if (!hasNext()) {
-                throw new NoSuchElementException("Ya no hay mas elementos en la lista");
+                throw new NoSuchElementException("Ya no hay más elementos en la lista");
             }
             T valor = actual.valor;
             actual = actual.siguiente;
